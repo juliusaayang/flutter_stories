@@ -260,17 +260,39 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTapDown: _onTapDown,
-            onTapUp: _onTapUp,
-            onLongPress: _onLongPress,
-            onLongPressUp: _onLongPressEnd,
+         Positioned.fill(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTapDown: (d) => _controller.stop(),
+                  onTapUp: (d) => _switchToPrevOrFinish(),
+                  onLongPress: _onLongPress,
+                  onLongPressUp: _onLongPressEnd,
+                ),
+              ),
+
+              Expanded(
+                flex: 3,
+                child: IgnorePointer(
+                  ignoring: true,
+                  child: SizedBox.expand(),
+                ),
+              ),
+
+              Expanded(
+                flex: 1,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTapDown: (d) => _controller.stop(),
+                  onTapUp: (d) => _switchToNextOrFinish(),
+                  onLongPress: _onLongPress,
+                  onLongPressUp: _onLongPressEnd,
+                ),
+              ),
+            ],
           ),
         ),
         widget.momentBuilder(

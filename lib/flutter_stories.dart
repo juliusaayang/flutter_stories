@@ -266,6 +266,7 @@ class _StoryState extends State<Story> with SingleTickerProviderStateMixin {
           right: 0,
           bottom: 0,
           child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTapDown: _onTapDown,
             onTapUp: _onTapUp,
             onLongPress: _onLongPress,
